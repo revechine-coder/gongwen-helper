@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+.venv/
+.venv-*/
+.pyinstaller-cache/
+
+build/
+dist/
+/*.spec
+*.zip
+gongwen-format-helper-source/
+
+storage/uploads/
+storage/outputs/

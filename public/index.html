@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>公文格式助手</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <div class="intro">
+          <p class="eyebrow">Word 公文排版工具</p>
+          <h1>公文格式助手</h1>
+          <p>
+            上传 Word 文稿后，系统会按常见党政机关公文格式自动调整页面、标题、正文、段落和页码。
+          </p>
+        </div>
+
+        <form class="panel" id="uploadForm">
+          <label class="dropzone" for="fileInput">
+            <input id="fileInput" name="file" type="file" accept=".docx,.doc,.rtf,.txt,.html,.htm,.odt" />
+            <span class="drop-icon">DOCX</span>
+            <strong id="fileName">选择或拖入 Word 文稿</strong>
+            <small>支持 .docx、.doc、.rtf、.txt、.html、.odt，处理后生成 .docx</small>
+          </label>
+
+          <fieldset class="format-options">
+            <legend>格式选项</legend>
+            <label>
+              <span>西文及数字字体</span>
+              <select name="westernFont" data-default="Times New Roman"></select>
+            </label>
+            <label>
+              <span>主标题字体</span>
+              <select name="titleFont" data-default="方正公文小标宋"></select>
+            </label>
+            <label>
+              <span>正文字体</span>
+              <select name="bodyFont" data-default="方正公文仿宋"></select>
+            </label>
+            <label>
+              <span>一级标题字体</span>
+              <select name="firstHeadingFont" data-default="方正公文黑体"></select>
+            </label>
+            <label>
+              <span>二级标题字体</span>
+              <select name="secondHeadingFont" data-default="方正公文楷体"></select>
+            </label>
+            <label>
+              <span>主标题字号</span>
+              <select name="titleSizePt" data-default="22" class="size-select"></select>
+            </label>
+            <label>
+              <span>正文字号</span>
+              <select name="bodySizePt" data-default="16" class="size-select"></select>
+            </label>
+            <label>
+              <span>正文行距 pt</span>
+              <input name="lineSpacingPt" type="number" min="18" max="40" step="0.5" value="29.5" />
+            </label>
+            <label>
+              <span>标题行距 pt</span>
+              <input name="titleLineSpacingPt" type="number" min="18" max="44" step="0.5" value="33" />
+            </label>
+            <label>
+              <span>字间距加宽 pt</span>
+              <input name="charSpacingPt" type="number" min="0" max="3" step="0.1" value="0.5" />
+            </label>
+          </fieldset>
+
+          <button class="primary" id="submitButton" type="submit">开始整理格式</button>
+        </form>
+      </section>
+
+      <section class="result" id="result" hidden>
+        <div class="result-head">
+          <div>
+            <p class="eyebrow">处理完成</p>
+            <h2>已生成标准化 Word 文档</h2>
+          </div>
+          <a class="download" id="downloadLink" href="#">下载文档</a>
+        </div>
+        <div class="report">
+          <h3>编号校验</h3>
+          <div id="warningList"></div>
+          <h3>格式识别报告</h3>
+          <div id="reportList"></div>
+        </div>
+      </section>
+
+      <p class="status" id="status" role="status"></p>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
