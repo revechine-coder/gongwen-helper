@@ -1,0 +1,32 @@
+name: Build Windows
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build .exe
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File tools/packaging/build_windows.ps1
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 公文格式助手-win
+          path: |
+            dist/*.exe
+            dist/public/**

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>公文格式助手</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar" aria-label="应用概览">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">文</span>
+          <div>
+            <strong>公文格式助手</strong>
+            <span>上传原稿后一键整理为规范 Word 文档</span>
+          </div>
+        </div>
+        <div class="topbar-summary" aria-label="处理说明">
+          <div>
+            <strong>本地处理</strong>
+            <span>文件不上传云端</span>
+          </div>
+          <div>
+            <strong>多格式导入</strong>
+            <span>docx / doc / rtf / txt</span>
+          </div>
+          <div>
+            <strong>标准输出</strong>
+            <span>A4 · 三号仿宋 · .docx</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <form class="panel" id="uploadForm">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">开始处理</p>
+              <h1>上传文稿，生成规范版式</h1>
+            </div>
+            <span class="step-pill">01</span>
+          </div>
+
+          <label class="dropzone" for="fileInput">
+            <input id="fileInput" name="file" type="file" accept=".docx,.doc,.rtf,.txt,.html,.htm,.odt" />
+            <span class="drop-icon" aria-hidden="true"></span>
+            <span class="drop-copy">
+              <strong id="fileName">选择或拖入 Word 文稿</strong>
+              <small id="fileMeta">支持 .docx、.doc、.rtf、.txt、.html、.odt</small>
+            </span>
+          </label>
+
+          <div class="process-strip" aria-label="处理步骤">
+            <span>识别结构</span>
+            <span>统一版式</span>
+            <span>生成文件</span>
+          </div>
+
+          <button class="primary" id="submitButton" type="submit">开始整理格式</button>
+        </form>
+
+        <aside class="panel settings-panel">
+          <div class="panel-head compact">
+            <div>
+              <p class="eyebrow">格式参数</p>
+              <h2>模板设置</h2>
+            </div>
+            <span class="step-pill">02</span>
+          </div>
+          <fieldset class="format-options">
+            <legend>字体</legend>
+            <label>
+              <span>西文及数字字体</span>
+              <select name="westernFont" data-default="Times New Roman"></select>
+            </label>
+            <label>
+              <span>主标题字体</span>
+              <select name="titleFont" data-default="方正公文小标宋"></select>
+            </label>
+            <label>
+              <span>正文字体</span>
+              <select name="bodyFont" data-default="方正公文仿宋"></select>
+            </label>
+            <label>
+              <span>一级标题字体</span>
+              <select name="firstHeadingFont" data-default="方正公文黑体"></select>
+            </label>
+            <label>
+              <span>二级标题字体</span>
+              <select name="secondHeadingFont" data-default="方正公文楷体"></select>
+            </label>
+          </fieldset>
+
+          <fieldset class="format-options metrics">
+            <legend>字号与行距</legend>
+            <label>
+              <span>主标题字号</span>
+              <select name="titleSizePt" data-default="22" class="size-select"></select>
+            </label>
+            <label>
+              <span>正文字号</span>
+              <select name="bodySizePt" data-default="16" class="size-select"></select>
+            </label>
+            <label>
+              <span>正文行距 pt</span>
+              <input name="lineSpacingPt" type="number" min="18" max="40" step="0.5" value="29.5" />
+            </label>
+            <label>
+              <span>标题行距 pt</span>
+              <input name="titleLineSpacingPt" type="number" min="18" max="44" step="0.5" value="33" />
+            </label>
+            <label>
+              <span>字间距加宽 pt</span>
+              <input name="charSpacingPt" type="number" min="0" max="3" step="0.1" value="0.5" />
+            </label>
+          </fieldset>
+        </aside>
+      </section>
+
+      <section class="result" id="result" hidden>
+        <div class="result-head">
+          <div>
+            <p class="eyebrow">处理完成</p>
+            <h2>已生成标准化 Word 文档</h2>
+          </div>
+          <a class="download" id="downloadLink" href="#">下载文档</a>
+        </div>
+        <div class="report">
+          <section class="report-section" aria-labelledby="warningTitle">
+            <h3 id="warningTitle">编号校验</h3>
+            <div id="warningList"></div>
+          </section>
+          <section class="report-section" aria-labelledby="reportTitle">
+            <h3 id="reportTitle">格式识别报告</h3>
+            <div id="reportList"></div>
+          </section>
+        </div>
+      </section>
+
+      <p class="status" id="status" role="status"></p>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
