@@ -60,11 +60,11 @@ powershell -ExecutionPolicy Bypass -File tools/packaging/build_windows.ps1
 生成文件：
 
 ```text
-dist\公文格式助手.exe
+dist\GongwenHelper.exe
 dist\public\
 ```
 
-Windows 运行时请保持 `公文格式助手.exe` 和 `public/` 在同一目录，避免网页资源 404。
+Windows 运行时请保持 `GongwenHelper.exe` 和 `public` 文件夹在同一目录，避免网页资源 404。
 
 ## GitHub Actions 打包 Windows
 
@@ -85,7 +85,7 @@ Windows 运行时请保持 `公文格式助手.exe` 和 `public/` 在同一目�
 artifact 中应包含：
 
 ```text
-公文格式助手.exe
+GongwenHelper.exe
 public/
 ```
 
