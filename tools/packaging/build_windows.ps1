@@ -11,7 +11,7 @@ if (-not (Test-Path ".venv-packaging\Scripts\python.exe")) {
   } else {
     $pythonLauncher = Get-Command py -ErrorAction SilentlyContinue
     if (-not $pythonLauncher) {
-      throw "未找到 Python。请先安装 Python 3.11 或更高版本。"
+      throw "Python not found. Please install Python 3.11 or higher."
     }
     py -3.11 -m venv .venv-packaging
   }
@@ -20,7 +20,7 @@ if (-not (Test-Path ".venv-packaging\Scripts\python.exe")) {
 $PythonExe = ".\.venv-packaging\Scripts\python.exe"
 $Version = & $PythonExe -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')"
 if ([version]$Version -lt [version]"3.11") {
-  throw "Python 版本过低：$Version。请使用 Python 3.11 或更高版本。"
+  throw "Python version too low: $Version. Please use Python 3.11 or higher."
 }
 
 .\.venv-packaging\Scripts\python.exe -m pip install -r requirements-packaging.txt
@@ -34,12 +34,12 @@ New-Item -ItemType Directory -Force ".packaging-storage\outputs" | Out-Null
   --noconfirm `
   --windowed `
   --onefile `
-  --name "公文格式助手" `
+  --name "GongwenHelper" `
   --add-data "public;public" `
   --add-data ".packaging-storage;storage" `
   desktop_app.py
 
 Copy-Item -Recurse -Force "public" "dist\public"
 
-Write-Host "Windows exe generated at: $RootDir\dist\公文格式助手.exe"
+Write-Host "Windows exe generated at: $RootDir\dist\GongwenHelper.exe"
 Write-Host "Web assets copied to: $RootDir\dist\public"
