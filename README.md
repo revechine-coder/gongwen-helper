@@ -1,10 +1,18 @@
-# 公文格式助手
+# 公文格式助手 (Official Document Formatter)
+
+[English](#english) | [中文](#chinese)
+
+---
+
+<a name="chinese"></a>
+
+## 中文介绍
 
 公文格式助手是一个本地运行的 Word 文稿格式整理工具。用户上传 `.docx`、`.doc`、`.rtf`、`.txt`、`.html`、`.odt` 文稿后，工具会按内置公文格式模板生成新的 `.docx` 文件。
 
 处理流程会先清除原文稿已有段落和文字直接格式，仅保留文本内容，再按规则重新排版。全文段前、段后间距统一为 `0`。
 
-## 功能概览
+### 功能概览
 
 - 上传文稿并生成标准化 `.docx`
 - 自动处理页面、页边距、标题、正文、主送单位、会议信息、附件、落款、页码
@@ -15,7 +23,7 @@
 - 支持调整正文字号、标题字号、行距、字间距
 - 默认字间距为加宽 `0.5pt`
 
-## 本地运行
+### 本地运行
 
 进入项目目录后运行：
 
@@ -35,7 +43,7 @@ http://127.0.0.1:8765
 PORT=8778 python3 server.py
 ```
 
-## 桌面封装
+### 桌面封装
 
 封装后的 macOS `.app` 和 Windows `.exe` 都会启动本地服务，并自动打开浏览器界面。
 
@@ -66,7 +74,7 @@ dist\public\
 
 Windows 运行时请保持 `GongwenHelper.exe` 和 `public` 文件夹在同一目录，避免网页资源 404。
 
-## GitHub Actions 打包 Windows
+### GitHub Actions 打包 Windows
 
 项目已内置工作流：
 
@@ -89,7 +97,7 @@ GongwenHelper.exe
 public/
 ```
 
-## 当前默认格式
+### 当前默认格式
 
 - 页面：A4
 - 页边距：上 `3.7cm`，下 `3cm`，左 `2.8cm`，右 `2.6cm`，页脚 `2.5cm`
@@ -102,7 +110,7 @@ public/
 - 三级标题：三号 `方正公文仿宋` 加粗
 - 页码：页脚居中，样式 `— 1 —`，四号 `Times New Roman`
 
-## 可选格式项
+### 可选格式项
 
 网页界面可调整：
 
@@ -119,7 +127,7 @@ public/
 
 默认值即当前公文格式模板。
 
-## 非 `.docx` 文件转换
+### 非 `.docx` 文件转换
 
 `.docx` 可直接处理。
 
@@ -130,7 +138,7 @@ public/
 
 如果转换工具不可用，请先将文稿另存为 `.docx` 后再上传。
 
-## 目录说明
+### 目录说明
 
 ```text
 .
@@ -145,3 +153,153 @@ public/
 ```
 
 `storage/uploads/`、`storage/outputs/`、`build/`、`dist/`、`.venv-packaging/` 都是本地产物，不应提交到 GitHub。
+
+---
+
+<a name="english"></a>
+
+## English Introduction
+
+Official Document Formatter is a locally-run Word document formatting tool. After uploading `.docx`, `.doc`, `.rtf`, `.txt`, `.html`, or `.odt` files, the tool automatically generates a newly formatted `.docx` file based on pre-configured standard official document templates.
+
+The core process clears all existing inline paragraph and character styles from the original document, keeping only the plain text, and then reapplies standardized layout rules. The space before and after paragraphs is uniformly set to `0`.
+
+### Features
+
+- Upload documents and generate standardized `.docx` files.
+- Automatically format layout, margins, titles, body text, addressees, meeting metadata, attachments, signatures, and page numbers.
+- Auto-detect first, second, and third-level headings with automatic numbering checks.
+- Support converting MS Word auto-numbering into hardcoded/real text numbers.
+- Support selecting fonts from the local system dropdown.
+- Support Chinese traditional size standards (e.g., "二号" / No.2, "三号" / No.3).
+- Customizable font sizes for body/headings, line spacing, and character spacing.
+- Character spacing is expanded by `0.5pt` by default.
+
+### Local Installation
+
+Run the service inside the repository root directory:
+
+```bash
+python3 server.py
+```
+
+Open your browser at the default address:
+
+```text
+http://127.0.0.1:8765
+```
+
+To specify a custom port:
+
+```bash
+PORT=8778 python3 server.py
+```
+
+### Desktop App Packaging
+
+The packaged macOS `.app` and Windows `.exe` versions launch the local background service and automatically open the web UI in your browser.
+
+macOS Packaging:
+
+```bash
+bash tools/packaging/build_macos.sh
+```
+
+Output:
+
+```text
+dist/公文格式助手.app
+```
+
+Windows Local Packaging:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/packaging/build_windows.ps1
+```
+
+Output:
+
+```text
+dist\GongwenHelper.exe
+dist\public\
+```
+
+For Windows deployments, ensure `GongwenHelper.exe` and the `public/` folder remain in the same directory to prevent web assets 404.
+
+### Windows Packaging via GitHub Actions
+
+The repository includes a pre-configured CI workflow:
+
+```text
+.github/workflows/build-windows.yml
+```
+
+Pushing to the `main` branch triggers an automated build. You can also manually trigger it via the Actions tab on GitHub (`Run workflow`).
+
+Once completed, download the artifact:
+
+```text
+公文格式助手-win
+```
+
+The artifact contains:
+
+```text
+GongwenHelper.exe
+public/
+```
+
+### Standard Presets (Default Chinese Template)
+
+- **Page Size:** A4
+- **Margins:** Top `3.7cm`, Bottom `3cm`, Left `2.8cm`, Right `2.6cm`, Footer `2.5cm`
+- **Main Title:** Size 2 "FangZheng XiaoBiaoSong" (方正公文小标宋), Centered, Line Spacing `33pt`
+- **Body Text:** Size 3 "FangZheng FangSong" (方正公文仿宋), Fixed Line Spacing `29.5pt`
+- **Western Text & Digits:** `Times New Roman`
+- **Character Spacing:** Expanded by `0.5pt`
+- **Heading Level 1:** Size 3 "FangZheng HeiTi" (方正公文黑体)
+- **Heading Level 2:** Size 3 "FangZheng KaiTi" (方正公文楷体)
+- **Heading Level 3:** Size 3 "FangZheng FangSong" (方正公文仿宋) Bold
+- **Page Numbers:** Centered footer, format `— 1 —`, Size 4 `Times New Roman`
+
+### Adjustable Settings
+
+Through the Web UI, you can adjust:
+
+- Western text and digits font
+- Main title font
+- Body text font
+- Heading level 1/2 fonts
+- Main title size
+- Body text size
+- Body/Heading line spacing
+- Character spacing expansion size
+
+Default presets conform to standard official document guidelines.
+
+### Formats conversion (Non-docx)
+
+`.docx` is processed natively.
+
+Other formats require external system utilities:
+
+- **macOS:** Prefers the system native `textutil` CLI tool.
+- **Windows:** We recommend installing LibreOffice and adding `soffice.exe` to your system `PATH`.
+
+If conversion utilities are missing, please save your document as a `.docx` before uploading.
+
+### Directory Structure
+
+```text
+.
+├── formatter.py                 # Core Word document formatting logic
+├── server.py                    # Local Web Service backend
+├── desktop_app.py               # Desktop entry point (opens UI automatically)
+├── public/                      # Front-end static assets
+├── tools/packaging/             # Packaging scripts for macOS / Windows
+├── .github/workflows/           # GitHub Actions workflow for Windows build
+├── requirements-packaging.txt   # Dependencies required for packaging
+└── README.md
+```
+
+Note: Local artifacts like `storage/uploads/`, `storage/outputs/`, `build/`, `dist/`, and `.venv-packaging/` are git-ignored and should not be committed.
